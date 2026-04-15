@@ -1,0 +1,37 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Local OS/editor files
+.DS_Store
+*.swp
+*.swo
+
+# Generated intermediate analysis outputs
+data/
+raw_data/
+analysis/table1/inter_output/
+analysis/table3/math/
+classification/Data/
+classification/Factor/
+classification/event_collect/
+classification/hist/
+classification/pair/
+classification/plot/
+classification/result/
+classification/x/
+
+# Large trajectory or array files if generated inside this repository
+*.xtc
+*.trr
+*.dcd
+*.gro
+*.tpr
+*.edr
+*.cpt
+*.lammpstrj
+*.xyz
+*.npy
+*.npz

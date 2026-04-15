@@ -1,0 +1,4 @@
+anion,Ea_soft_meV,Ea_soft_se_meV,R2_soft,Ea_hard_meV,Ea_hard_se_meV,R2_hard,dH_meV
+fsi,131.9,31.2,0.8993,201.8,11.3,0.9937,53.1
+tfsi,184.3,18.5,0.9803,265.1,5.2,0.9992,61.5
+beti,237.2,7.7,0.9979,289.6,8.1,0.9984,64.8

@@ -126,7 +126,7 @@ for T in ["298","353","373","423"]:
             t1_train.append(truetrainlist[i])
             t1_type.append(typelist[i])
             t1_train.append([truetrainlist[i][-1],truetrainlist[i+1][0]])
-            t1_type.append(True if typelist[i] and typelist[i+1] and truetrainlist[i+1][0]-truetrainlist[i][-1] <=multi*inter[T] else False)
+            t1_type.append(True if typelist[i] and typelist[i+1] and truetrainlist[i+1][0]-truetrainlist[i][-1] <=multi3*inter[T] else False)
         t1_train.append(truetrainlist[-1])
         t1_type.append(typelist[-1])
         if t1_train[0][0] != 0:

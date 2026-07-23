@@ -40,9 +40,9 @@ FIGURE_ROOT = _os.environ.get(
 # ── Solvation-shell cutoff radius (Å) ────────────────────────────────────────
 # Determined from the first minimum of the Li-anion RDF (~5.5 Å)
 RCUT = {
-    "fsi":  5.5,
-    "tfsi": 5.5,
-    "beti": 5.5,
+    "fsi":  5.6,
+    "tfsi": 5.55,
+    "beti": 5.8,
 }
 
 # ── Table 1: Inter-event time distribution parameters ───────────────────────

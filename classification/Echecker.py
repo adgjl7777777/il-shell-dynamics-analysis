@@ -252,7 +252,7 @@ for T in ["298","353","373","423"]:
             plt.ylim([0,max_y])
             plt.xticks([_*10000 for _ in range(11)])
         elif cur == 2:
-            plt.ylabel("E")
+            plt.ylabel(r"Events ($E_{\mathrm{" + anion.upper() + r"}}$)")
         elif cur == 4:
             plt.xlabel("Timeline(ps)")
     plt.tight_layout()

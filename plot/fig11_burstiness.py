@@ -11,7 +11,8 @@ import matplotlib.pyplot as plt
 
 CODE_ROOT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS    = os.path.join(CODE_ROOT, "results")
-IMAGES_DIR = os.path.join(os.path.dirname(CODE_ROOT), "paper", "Images", "A")
+FIGURE_ROOT = os.environ.get("IL_FIGURE_ROOT", os.path.join(os.path.dirname(CODE_ROOT), "paper", "Images"))
+IMAGES_DIR = os.path.join(FIGURE_ROOT, "A")
 os.makedirs(IMAGES_DIR, exist_ok=True)
 
 ANIONS = ["fsi", "tfsi", "beti"]
@@ -68,7 +69,8 @@ for anion in ANIONS:
     ax.set_title(LABELS[anion], fontsize=9)
     ax.set_xticks(TEMPS)
     ax.tick_params(labelsize=7, direction="in")
-    ax.legend(fontsize=6, loc="best", framealpha=0.7)
+    if anion == "fsi":
+        ax.legend(fontsize=6, loc="best", framealpha=0.7, handlelength=4.5)
     fig.tight_layout()
 
     out = os.path.join(IMAGES_DIR, f"{anion}_plot.pdf")

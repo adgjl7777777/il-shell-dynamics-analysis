@@ -13,7 +13,8 @@ import matplotlib.pyplot as plt
 
 CODE_ROOT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS    = os.path.join(CODE_ROOT, "results")
-IMAGES_DIR = os.path.join(os.path.dirname(CODE_ROOT), "paper", "Images", "coefficient")
+FIGURE_ROOT = os.environ.get("IL_FIGURE_ROOT", os.path.join(os.path.dirname(CODE_ROOT), "paper", "Images"))
+IMAGES_DIR = os.path.join(FIGURE_ROOT, "coefficient")
 os.makedirs(IMAGES_DIR, exist_ok=True)
 
 ANIONS = ["fsi", "tfsi", "beti"]
@@ -63,7 +64,7 @@ for a in ANIONS:
                 color=gc, linestyle=ls, marker=mk,
                 label=ALABEL[a], capsize=2, markersize=4, linewidth=1.0)
 ax.set_xlabel("Temperature (K)", fontsize=8)
-ax.set_ylabel(r"Soft ratio $\theta$", fontsize=8)
+ax.set_ylabel(r"$\theta$", fontsize=8)
 ax.set_xticks(TEMPS)
 ax.tick_params(labelsize=7, direction="in")
 ax.legend(fontsize=7)
@@ -81,20 +82,20 @@ for a in ANIONS:
     ses_s = [alpha_se["soft"][a].get(T, 0)   for T in TEMPS]
     ax.errorbar(TEMPS, ys_s, yerr=ses_s,
                 color="blue", linestyle=ls, marker=mk,
-                label=f"{ALABEL[a]} soft", capsize=2, markersize=4, linewidth=1.0)
+                label=f"{ALABEL[a]}, Soft", capsize=2, markersize=4, linewidth=1.0)
     # hard (red, same linestyle/marker)
     ys_h  = [alpha["hard"][a].get(T, np.nan) for T in TEMPS]
     ses_h = [alpha_se["hard"][a].get(T, 0)   for T in TEMPS]
     ax.errorbar(TEMPS, ys_h, yerr=ses_h,
                 color="red", linestyle=ls, marker=mk,
-                label=f"{ALABEL[a]} hard", capsize=2, markersize=4, linewidth=1.0,
+                label=f"{ALABEL[a]}, Hard", capsize=2, markersize=4, linewidth=1.0,
                 alpha=0.7)
 ax.set_xlabel("Temperature (K)", fontsize=8)
 ax.set_ylabel(r"$\alpha$", fontsize=8)
 ax.set_yscale("log")
 ax.set_xticks(TEMPS)
 ax.tick_params(labelsize=7, direction="in")
-ax.legend(fontsize=6, ncol=2)
+ax.legend(fontsize=6, ncol=2, handlelength=4.5)
 fig.tight_layout()
 fig.savefig(os.path.join(IMAGES_DIR, "a.pdf"), dpi=300)
 plt.close(fig)
@@ -108,18 +109,18 @@ for a in ANIONS:
     ses_s = [beta_se["soft"][a].get(T, 0)   for T in TEMPS]
     ax.errorbar(TEMPS, ys_s, yerr=ses_s,
                 color="blue", linestyle=ls, marker=mk,
-                label=f"{ALABEL[a]} soft", capsize=2, markersize=4, linewidth=1.0)
+                label=f"{ALABEL[a]}, Soft", capsize=2, markersize=4, linewidth=1.0)
     ys_h  = [beta["hard"][a].get(T, np.nan) for T in TEMPS]
     ses_h = [beta_se["hard"][a].get(T, 0)   for T in TEMPS]
     ax.errorbar(TEMPS, ys_h, yerr=ses_h,
                 color="red", linestyle=ls, marker=mk,
-                label=f"{ALABEL[a]} hard", capsize=2, markersize=4, linewidth=1.0,
+                label=f"{ALABEL[a]}, Hard", capsize=2, markersize=4, linewidth=1.0,
                 alpha=0.7)
 ax.set_xlabel("Temperature (K)", fontsize=8)
 ax.set_ylabel(r"$\beta$", fontsize=8)
 ax.set_xticks(TEMPS)
 ax.tick_params(labelsize=7, direction="in")
-ax.legend(fontsize=6, ncol=2)
+# User requested: remove legend from b.pdf (only keep on alpha)
 fig.tight_layout()
 fig.savefig(os.path.join(IMAGES_DIR, "b.pdf"), dpi=300)
 plt.close(fig)

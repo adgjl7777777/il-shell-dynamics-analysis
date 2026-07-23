@@ -11,7 +11,8 @@ import matplotlib.pyplot as plt
 
 CODE_ROOT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS    = os.path.join(CODE_ROOT, "results")
-IMAGES_DIR = os.path.join(os.path.dirname(CODE_ROOT), "paper", "Images", "coefficient")
+FIGURE_ROOT = os.environ.get("IL_FIGURE_ROOT", os.path.join(os.path.dirname(CODE_ROOT), "paper", "Images"))
+IMAGES_DIR = os.path.join(FIGURE_ROOT, "coefficient")
 os.makedirs(IMAGES_DIR, exist_ok=True)
 
 ANIONS = ["fsi", "tfsi", "beti"]
@@ -23,7 +24,7 @@ ASTYLE = {
     "tfsi": ("--", "^"),
     "beti": (":",  "s"),
 }
-ALABEL = {"fsi": "fsi", "tfsi": "tfsi", "beti": "beti"}
+ALABEL = {"fsi": "FSI", "tfsi": "TFSI", "beti": "BETI"}
 
 STATE_COLOR = {"soft": "blue", "hard": "red", "total": "gray"}
 STATE_LABEL = {"soft": "Soft", "hard": "Hard", "total": "Total"}
@@ -51,15 +52,19 @@ for state in ["soft", "hard", "total"]:
         ses = [D_se[state][a].get(T, 0)      for T in TEMPS]
         ax.errorbar(TEMPS, ys, yerr=ses,
                     color=color, linestyle=ls, marker=mk,
-                    label=f"{ALABEL[a]}_{state}",
+                    label=ALABEL[a],
                     capsize=2, markersize=4, linewidth=1.0)
 
     ax.set_xlabel("Temperature (K)", fontsize=8)
     ax.set_ylabel(r"Diffusion Coefficient ($\mathrm{m^2/s}$)", fontsize=7)
+    ax.set_title(STATE_LABEL[state], fontsize=9)
     ax.set_yscale("log")
     ax.set_xticks(TEMPS)
     ax.tick_params(labelsize=7, direction="in")
-    ax.legend(fontsize=6)
+    
+    if state == "soft":
+        ax.legend(fontsize=6, loc="lower right", handlelength=4.5)
+        
     fig.tight_layout()
 
     out = os.path.join(IMAGES_DIR, f"d_{state}.pdf")

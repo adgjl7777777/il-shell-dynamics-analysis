@@ -45,13 +45,13 @@ def plot_msd(msd, color, title, fname, fit_range=None):
     ax.set_ylabel(r"MSD ($\AA^2$)", fontsize=8)
     ax.set_title(title, fontsize=9)
     ax.tick_params(labelsize=7, direction="in")
-    ax.legend(fontsize=7)
+    # ax.legend(fontsize=7) # User requested: remove legend
     fig.tight_layout()
     out = os.path.join(IMAGES_DIR, fname)
     fig.savefig(out, dpi=300)
     plt.close(fig)
     print(f"Saved: {out}")
 
-plot_msd(soft_msd,  "blue",  "FSI, 298K, Soft",  "soft.pdf")
-plot_msd(hard_msd,  "red",   "FSI, 298K, Hard",  "hard.pdf")
-plot_msd(total_msd, "black", "FSI, 298K, Total", "total.pdf")
+plot_msd(soft_msd,  "blue",  "FSI, 298 K, Soft",  "soft.pdf")
+plot_msd(hard_msd,  "red",   "FSI, 298 K, Hard",  "hard.pdf")
+plot_msd(total_msd, "black", "FSI, 298 K, Total", "total.pdf")
